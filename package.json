@@ -2,6 +2,9 @@
   "name": "electron-ts-react-pomodoro",
   "version": "0.1.0",
   "private": true,
+  "productName": "Pomodoro Timer",
+  "main": "public/electron.js",
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -10,9 +13,11 @@
     "@types/node": "^16.18.23",
     "@types/react": "^18.0.31",
     "@types/react-dom": "^18.0.11",
+    "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.60.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -20,7 +25,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-electron": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "package": "electron-builder build --mac --win -c.extraMetadata.main=build/electron.js --publish never",
+    "publish": "electron-builder build --mac --win --publish always"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +47,38 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^23.2.1",
+    "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "mac": {
+      "publish": {
+        "provider": "github",
+        "owner": "Github Owner",
+        "repo": "Repository Name",
+        "private": true,
+        "token": ""
+      }
+    },
+    "win": {
+      "publish": {
+        "provider": "github",
+        "owner": "Github Owner",
+        "repo": "Repository Name",
+        "private": true,
+        "token": ""
+      }
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "private": true,
+      "owner": "Github Owner"
+    }
   }
 }
